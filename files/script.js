@@ -33,7 +33,7 @@ window.onscroll = () => {
 
 /*========== Typing animation in home page ==========*/
 var typed = new Typed(".text", {
-    strings: ["Programming" , "Web Development", "App Development","UI UX Designing"],
+    strings: ["Data Analytics", "Programming" , "Web Development", "Ethical Hacking","UI UX Designing"],
     typeSpeed:100,
     backSpeed:100,
     backDelay:1000,
