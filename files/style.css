@@ -228,20 +228,34 @@ body {
     max-width: 492px;
     max-height: 492px;
 }
-.nav__toggle {
-  font-size: 1.1rem;
-  cursor: pointer;
+#chat-assistant {
+  position: fixed;
+  top: 100px;
+  right: 20px;
+  z-index: 999;
+  font-family: 'Poppins', sans-serif;
 }
 
-.nav__toggle:hover {
-  color: var(--first-color);
+#chat-assistant button {
+  background-color: #0ef; /* Harini's pink theme */
+  border: none;
+  color:black;
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 20px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
-#chatbot-toggle {
-  font-size: 1.3rem;
-  cursor: pointer;
-  margin-right: 1rem;
+#chat-box {
+  background:#0ef;
+  border: 2px solid #0ef;
+  padding: 10px;
+  margin-top: 10px;
+  width: 250px;
+  border-radius: 10px;
 }
+
 
 /*about*/
 .custom-shape-divider-top-1720508545 {

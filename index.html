@@ -96,9 +96,18 @@
                 </div>
                 <a href="https://drive.google.com/file/d/1katH22mn3_W9DFGiSMfPzML9iI7onyHT/view?usp=drivesdk" style="--i:11" class="btn-box" target="_blank">Download Resume</a>
             </div>
-<div class="nav__toggle" id="chatbot-toggle">
-            <i class="uil uil-robot"></i>
-          </div>
+
+          <!-- 💬 Chat Assistant Floating Button -->
+<div id="chat-assistant">
+  <button onclick="toggleChat()">🤖</button>
+  <div id="chat-box" style="display:none;">
+    <p>Hello! I'm your assistant 🦾</p>
+    <input type="text" id="chat-input" placeholder="Ask me something..." />
+    <button onclick="sendMessage()">Send</button>
+    <div id="chat-response"></div>
+  </div>
+</div>
+
         </section>
 
         <!-- =========================================About========================================= -->

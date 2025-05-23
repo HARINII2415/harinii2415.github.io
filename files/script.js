@@ -10,6 +10,38 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
+async function sendMessage() {
+  const input = document.getElementById("chat-input").value;
+  const responseDiv = document.getElementById("chat-response");
+
+  const prompt = `
+You are an AI assistant inside Harini A's portfolio.
+The user is asking: "${input}"
+
+Respond using Harini's profile:
+- BTech IT, 3rd Year, MKCE
+- Projects: Cardiovascular AI, HbA1c Diabetes ML, Leaf Detection
+- Skills: Python, SQL, UI/UX, Data Analytics, Azure
+- Goal: To become a top IT professional and contribute to a dynamic team
+
+Answer like a friendly assistant.`;
+
+  const res = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=YOUR_API_KEY", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      contents: [{ parts: [{ text: prompt }] }]
+    })
+  });
+
+  const data = await res.json();
+  const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text || "Sorry, I couldn't respond 😅";
+
+  responseDiv.innerHTML = `<p><strong>You:</strong> ${input}</p><p><strong>Gemini:</strong> ${reply}</p>`;
+  document.getElementById("chat-input").value = '';
+}
 
 /*========== scroll sections active link in navbar ==========*/
 let sections = document.querySelectorAll('section');
