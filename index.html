@@ -98,27 +98,28 @@
             </div>
 
           <!-- 💬 Chat Assistant Floating Button -->
- <div id="chatbot-box" style="position: fixed; top: 100px; right: 30px; background-color: #ffc0cb; color: #000; padding: 10px; border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.3); z-index: 1000; max-width: 300px;">
-    <div id="chat-response" style="max-height: 200px; overflow-y: auto; font-family: sans-serif;"></div>
-    <input id="chat-input" type="text" placeholder="Ask about Harini 💬" style="width: 80%; padding: 5px; margin-top: 5px;">
-    <button onclick="sendMessage()" style="padding: 5px; background: white; border-radius: 5px; margin-left: 5px;">Send</button>
+<div id="chatbot-box" style="position: fixed; top: 100px; right: 30px; background-color: #0ef; color: #222; padding: 15px 20px; border-radius: 20px; box-shadow: 0 8px 16px rgba(0,0,0,0.2); z-index: 1000; max-width: 320px; font-family: 'Segoe UI', sans-serif;">
+    <h3 style="margin: 0 0 10px; font-size: 18px; color: #ff3399; text-align: center;">💬 Chat with Harini's Assistant</h3>
+    <div id="chat-response" style="max-height: 220px; overflow-y: auto; background: #fff; padding: 10px; border-radius: 10px; margin-bottom: 10px; font-size: 14px; line-height: 1.4; border: 1px solid #ddd;"></div>
+    <input id="chat-input" type="text" placeholder="Type your message..." style="width: 70%; padding: 8px 10px; border-radius: 8px; border: 1px solid #ccc; font-size: 14px;">
+    <button onclick="sendMessage()" style="padding: 8px 12px; background: #ff3399; color: #fff; border: none; border-radius: 8px; cursor: pointer; font-size: 14px; margin-left: 5px;">Send</button>
   </div>
 
   <script>
-    const apiKey = "YOUR_GEMINI_API_KEY"; // 🔑 Replace this with your real Gemini API key
+    const apiKey = "AIzaSyBN-DK-0uVXA-iGeAeyZbbQYWLBoWDHGac"; // 🔑 Replace this with your real Gemini API key
 
     async function sendMessage() {
       const input = document.getElementById("chat-input").value;
       const responseDiv = document.getElementById("chat-response");
 
       const prompt = `
-You are a personal assistant chatbot in Harini A's portfolio site.
+You are a personal assistant chatbot in Harini A's portfolio site. your name is Nick AI.
 Answer the user's question about Harini using this info:
 - 3rd year B.Tech IT student at MKCE
-- Skilled in Python, SQL, Data Analytics, UI/UX, Azure
-- Projects: Cardiovascular AI, HbA1c Diabetes Detection, Portfolio Website
+- Skilled in Python,ML, SQL, Data Analytics, UI/UX, Azure,Data Science
+- Projects: Cardiovascular AI, HbA1c Diabetes Detection, Portfolio Website,Menstrual Cycle recommendation,skin cancer dedection,online plant management.
 User asked: "${input}"
-Respond politely and informatively.`;
+Respond politely and informatively and use relavant emojis.`;
 
       const res = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=" + apiKey, {
         method: "POST",
@@ -131,7 +132,7 @@ Respond politely and informatively.`;
       const data = await res.json();
       const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text || "Sorry, I couldn’t reply 😥";
 
-      responseDiv.innerHTML += `<p><strong>You:</strong> ${input}</p><p><strong>Gemini:</strong> ${reply}</p>`;
+      responseDiv.innerHTML += `<p><strong>You:</strong> ${input}</p><p><strong>Nick AI:</strong> ${reply}</p>`;
       document.getElementById("chat-input").value = '';
     }
   </script>
