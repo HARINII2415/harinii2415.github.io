@@ -228,6 +228,20 @@ body {
     max-width: 492px;
     max-height: 492px;
 }
+.nav__toggle {
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+.nav__toggle:hover {
+  color: var(--first-color);
+}
+
+#chatbot-toggle {
+  font-size: 1.3rem;
+  cursor: pointer;
+  margin-right: 1rem;
+}
 
 /*about*/
 .custom-shape-divider-top-1720508545 {
