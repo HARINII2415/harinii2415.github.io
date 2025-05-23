@@ -106,6 +106,13 @@
     <button onclick="sendMessage()">Send</button>
     <div id="chat-response"></div>
   </div>
+    <!-- Chatbot UI -->
+<div style="position: fixed; bottom: 20px; right: 20px; z-index: 999;">
+  <div id="chat-response" style="background:#fff; padding:10px; max-width:300px; max-height:200px; overflow-y:auto; border-radius:10px;"></div>
+  <input type="text" id="chat-input" placeholder="Ask me anything..." style="padding:5px; width:200px;">
+  <button onclick="sendMessage()">Send</button>
+</div>
+
 </div>
 
         </section>
