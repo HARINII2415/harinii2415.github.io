@@ -228,34 +228,120 @@ body {
     max-width: 492px;
     max-height: 492px;
 }
-#chat-assistant {
-  position: fixed;
-  top: 100px;
-  right: 20px;
-  z-index: 999;
-  font-family: 'Poppins', sans-serif;
+
+.chat-container {
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    z-index: 1000;
+    font-family: 'Protest Revolution', sans-serif;
 }
 
-#chat-assistant button {
-  background-color: #0ef; /* Harini's pink theme */
-  border: none;
-  color:black;
-  padding: 10px;
-  border-radius: 50%;
-  cursor: pointer;
-  font-size: 20px;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+#chat-toggle {
+    background: #0ef;
+    border: none;
+    color: #000;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    transition: transform 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+}
+
+#chat-toggle:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px #0ef;
 }
 
 #chat-box {
-  background:#0ef;
-  border: 2px solid #0ef;
-  padding: 10px;
-  margin-top: 10px;
-  width: 250px;
-  border-radius: 10px;
+    position: absolute;
+    top: 70px;
+    right: 0;
+    width: 300px;
+    background: #1a1d25;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+    overflow: hidden;
 }
 
+.chat-header {
+    background: #0ef;
+    color: #000;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.chat-header h3 {
+    margin: 0;
+    font-size: 16px;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    color: #000;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+#chat-response {
+    height: 300px;
+    overflow-y: auto;
+    padding: 15px;
+    color: #fff;
+}
+
+#chat-response p {
+    margin: 10px 0;
+    line-height: 1.4;
+}
+
+#chat-response strong {
+    color: #0ef;
+}
+
+.chat-input-container {
+    display: flex;
+    padding: 15px;
+    background: #2b2e3b;
+    gap: 10px;
+}
+
+#chat-input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #0ef;
+    border-radius: 20px;
+    background: #1a1d25;
+    color: #fff;
+    outline: none;
+}
+
+.chat-input-container button {
+    background: #0ef;
+    border: none;
+    color: #000;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    transition: transform 0.2s ease;
+}
+
+.chat-input-container button:hover {
+    transform: scale(1.1);
+}
 
 /*about*/
 .custom-shape-divider-top-1720508545 {
@@ -1127,6 +1213,9 @@ h3 {
         font-size: 15px;
         font-weight: 200;
     }
+    .btn-box:hover {
+        box-shadow: 0 0 5px cyan, 0 0 10px cyan, 0 0 15pc cyan, 0 0 20px cyan, 0 0 25px cyan;
+    }
     .img{
         max-width: 400px;
         position: relative;
@@ -1136,9 +1225,10 @@ h3 {
         padding-left: 0;
         margin-left: 0;
     }
-    .btn-box:hover {
-        box-shadow: 0 0 5px cyan, 0 0 10px cyan, 0 0 15pc cyan, 0 0 20px cyan, 0 0 25px cyan;
+    .btn-box{
+        margin-top: 2.5%;
     }
+    
     /*=============about================*/
     .about {
         grid-template-columns: 1fr;
@@ -1154,6 +1244,7 @@ h3 {
 
     .about-text {
         order: 1; 
+        
         padding-left: 5%;
         padding-right: 5%;
     }
@@ -1182,8 +1273,10 @@ h3 {
         -ms-hyphens: auto;
         hyphens: auto;
     }
+    
+    
 
-    /*===================skills==============*/
+    /*skills*/
     .subtitle{
         font-size: 40px;
         text-align: center;
@@ -1197,30 +1290,42 @@ h3 {
         margin-right: 5%;
         grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     }
-    
+    .skill-box{
+        display:block;
+    }
     .skill-box img{
         max-width: 30px;
         padding-bottom: 5px;
     }
 
     /*==========================project==============*/
-    .project{
-        max-width: 25rem;
-    }
     .prj{
-        padding-bottom: 30px;
+        padding-bottom: 35px;
     }
-    /*===================contact====================*/
+    .project{
+        max-width: 20rem;
+    }
+    .featured-projects-box h2{
+        font-size: 40px;
+        text-align: center;
+        letter-spacing: 5px;
+    }
+    .project-main-info h3{
+        font-size: 25px;
+    }
+    
+
+    /*======contact======*/
     .contacts h2{
-        font-size: 50px;
+        font-size: 40px;
+        text-align: center;
+        letter-spacing: 5px;
     }
     .contact-list i{
-        font-size: 15px;
+        font-size: 13px;
         padding: 5px 5px 0 0;
     }
-    .contact-list li{
-        font-size: 15px;
-    }
+    /*======GO TO TOP======*/
     .top{
         position: fixed;
         bottom: 2rem;
@@ -1232,19 +1337,25 @@ h3 {
         opacity: 0;
         transition: all .4s;
     }
+    .top i{
+        color: #000;
+    }
     /*================timeline responsive====*/
-    .timeline-container{
-        margin-left: 5%;
-        margin-right: 5%
-    }
     .acc-sec{
-        padding-top: 20%;
-    }
-    .acc-sec h1{
-        font-size: 40px;
+        padding-top: 30%;
     }
     .exp-sec h1{
-        font-size: 40px;
+        font-size: 30px;
+    }
+    .acc-sec h1{
+        font-size: 30px;
+    }
+    .hed{
+        letter-spacing: 1px;
+    }
+    .timeline-container{
+        margin-left: 2.5%;
+        margin-right: 2.5%
     }
     .timeline{
         margin: 50px auto;
