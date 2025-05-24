@@ -78,7 +78,6 @@
         <!-- =========================================Home========================================= -->
         <section class="home" id="Home">
             <div class="home-content">
-                
                 <h3>Hello, It's Me</h3>
                 <h1>Harini A</h1>
                 <h4 style="--i:6">I'm a Engineering graduate who is<br>
@@ -92,53 +91,31 @@
                     <a href="https://www.linkedin.com/in/harini-harini-a-9a014925a/"style="--i:7" target="https://www.linkedin.com/in/harini-harini-a-9a014925a/"><i class='bx bxl-linkedin'></i></a>
                     <a href="https://github.com/HARINII2415"style="--i:8" target="https://github.com/HARINII2415"><i class='bx bxl-github'></i></a>
                     <a href="https://instagram.com/_hazxnx_"style="--i:9" target="https://instagram.com/_hazxnx_"><i class='bx bxl-instagram' ></i></a>
-                   
                 </div>
                 <a href="https://drive.google.com/file/d/1katH22mn3_W9DFGiSMfPzML9iI7onyHT/view?usp=drivesdk" style="--i:11" class="btn-box" target="_blank">Download Resume</a>
             </div>
 
-          <!-- 💬 Chat Assistant Floating Button -->
-<div id="chatbot-box" style="position: fixed; top: 100px; right: 30px; background-color: #0ef; color: #222; padding: 15px 20px; border-radius: 20px; box-shadow: 0 8px 16px rgba(0,0,0,0.2); z-index: 1000; max-width: 320px; font-family: 'Segoe UI', sans-serif;">
-    <h3 style="margin: 0 0 10px; font-size: 18px; color: #ff3399; text-align: center;">💬 Chat with Harini's Assistant</h3>
-    <div id="chat-response" style="max-height: 220px; overflow-y: auto; background: #fff; padding: 10px; border-radius: 10px; margin-bottom: 10px; font-size: 14px; line-height: 1.4; border: 1px solid #ddd;"></div>
-    <input id="chat-input" type="text" placeholder="Type your message..." style="width: 70%; padding: 8px 10px; border-radius: 8px; border: 1px solid #ccc; font-size: 14px;">
-    <button onclick="sendMessage()" style="padding: 8px 12px; background: #ff3399; color: #fff; border: none; border-radius: 8px; cursor: pointer; font-size: 14px; margin-left: 5px;">Send</button>
-  </div>
-
-  <script>
-    const apiKey = // 🔑 Replace this with your real Gemini API key
-
-    async function sendMessage() {
-      const input = document.getElementById("chat-input").value;
-      const responseDiv = document.getElementById("chat-response");
-
-      const prompt = `
-You are a personal assistant chatbot in Harini A's portfolio site. your name is Nick AI.
-Answer the user's question about Harini using this info:
-- 3rd year B.Tech IT student at MKCE
-- Skilled in Python,ML, SQL, Data Analytics, UI/UX, Azure,Data Science
-- Projects: Cardiovascular AI, HbA1c Diabetes Detection, Portfolio Website,Menstrual Cycle recommendation,skin cancer dedection,online plant management.
-User asked: "${input}"
-Respond politely and informatively and use relavant emojis.`;
-
-      const res = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=" + apiKey, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          contents: [{ parts: [{ text: prompt }] }]
-        })
-      });
-
-      const data = await res.json();
-      const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text || "Sorry, I couldn’t reply 😥";
-
-      responseDiv.innerHTML += `<p><strong>You:</strong> ${input}</p><p><strong>Nick AI:</strong> ${reply}</p>`;
-      document.getElementById("chat-input").value = '';
-    }
-  </script>
-
-
-
+            <!-- Updated Chatbot UI -->
+            <div id="chat-assistant" class="chat-container">
+                <button id="chat-toggle" onclick="toggleChat()">
+                    <i class='bx bx-message-dots'></i>
+                </button>
+                <div id="chat-box" style="display: none;">
+                    <div class="chat-header">
+                        <h3>Chat with Nick AI 🤖</h3>
+                        <button onclick="toggleChat()" class="close-btn">
+                            <i class='bx bx-x'></i>
+                        </button>
+                    </div>
+                    <div id="chat-response"></div>
+                    <div class="chat-input-container">
+                        <input id="chat-input" type="text" placeholder="Ask me anything..." onkeypress="handleKeyPress(event)">
+                        <button onclick="sendMessage()">
+                            <i class='bx bx-send'></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <!-- =========================================About========================================= -->
@@ -199,45 +176,29 @@ Respond politely and informatively and use relavant emojis.`;
                     <p>CSS</p>
                 </div>
 
-               
-
-               
-
-                
-
                 <div class="skill-box reveal">
                     <img src="./img/logos/excel.png" alt="Java">
                     <p>Excel</p>
                 </div>
 
-               
-
                 <div class="skill-box reveal">
                     <img src="./img/logos/mysql.png" alt="MySQL">
                     <p>MySQL</p>
                 </div>
- <div class="skill-box reveal">
+                <div class="skill-box reveal">
                     <img src="./img/logos/java.png" alt="MySQL">
                     <p>Java</p>
                 </div>
-
-                
 
                 <div class="skill-box reveal">
                     <img src="./img/logos/linux.png" alt="Linux">
                     <p>Linux</p>
                 </div>
 
-                
-
                 <div class="skill-box reveal">
                     <img src="./img/logos/figma.png" alt="Figma">
                     <p>Figma</p>
                 </div>
-
-               
-
-               
 
                 <div class="skill-box reveal">
                     <img src="./img/logos/vscode.png" alt="VSCode">
@@ -249,18 +210,10 @@ Respond politely and informatively and use relavant emojis.`;
                     <p>Powerpoint</p>
                 </div>
 
-               
-
-                
-
                 <div class="skill-box reveal">
                     <img src="./img/logos/Canva.png" alt="Canva">
                     <p>Canva</p>
                 </div>
-
-                
-
-                
 
                 <div class="skill-box reveal">
                     <img src="./img/logos/blender.png" alt="Blender">
@@ -270,11 +223,6 @@ Respond politely and informatively and use relavant emojis.`;
             </div>
         </section>
         
-        
-        
-        
-
-
         <!--========================Projects============================-->
         <section id="Projects" class="prj reveal">
             <div class="featured-projects-box reveal">
