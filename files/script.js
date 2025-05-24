@@ -10,37 +10,53 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
+function toggleChat() {
+    const chatBox = document.getElementById("chat-box");
+    chatBox.style.display = chatBox.style.display === "none" ? "block" : "none";
+}
+
+function handleKeyPress(event) {
+    if (event.key === "Enter") {
+        sendMessage();
+    }
+}
+
 async function sendMessage() {
-  const input = document.getElementById("chat-input").value;
-  const responseDiv = document.getElementById("chat-response");
+    const input = document.getElementById("chat-input").value;
+    if (!input.trim()) return;
 
-  const prompt = `
-You are an AI assistant inside Harini A's portfolio.
-The user is asking: "${input}"
+    const responseDiv = document.getElementById("chat-response");
+    responseDiv.innerHTML += `<p><strong>You:</strong> ${input}</p>`;
+    document.getElementById("chat-input").value = '';
 
-Respond using Harini's profile:
-- BTech IT, 3rd Year, MKCE
-- Projects: Cardiovascular AI, HbA1c Diabetes ML, Leaf Detection
-- Skills: Python, SQL, UI/UX, Data Analytics, Azure
-- Goal: To become a top IT professional and contribute to a dynamic team
+    try {
+        const prompt = `
+You are Nick AI, a friendly assistant in Harini A's portfolio.
+Context about Harini:
+- 3rd year B.Tech IT student at MKCE
+- Skills: Python, ML, SQL, Data Analytics, UI/UX, Azure, Data Science
+- Projects: Cardiovascular AI, HbA1c Diabetes Detection, Portfolio Website, Menstrual Cycle recommendation, skin cancer detection, online plant management
+User asked: "${input}"
+Respond in a friendly, helpful way using emojis where appropriate.`;
 
-Answer like a friendly assistant.`;
+        const res = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=YOUR_API_KEY", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                contents: [{ parts: [{ text: prompt }] }]
+            })
+        });
 
-  const res = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=YOUR_API_KEY", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      contents: [{ parts: [{ text: prompt }] }]
-    })
-  });
-
-  const data = await res.json();
-  const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text || "Sorry, I couldn't respond 😅";
-
-  responseDiv.innerHTML = `<p><strong>You:</strong> ${input}</p><p><strong>Gemini:</strong> ${reply}</p>`;
-  document.getElementById("chat-input").value = '';
+        const data = await res.json();
+        const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text || "I'm sorry, I couldn't process that request 😅";
+        
+        responseDiv.innerHTML += `<p><strong>Nick AI:</strong> ${reply}</p>`;
+        responseDiv.scrollTop = responseDiv.scrollHeight;
+    } catch (error) {
+        responseDiv.innerHTML += `<p><strong>Nick AI:</strong> I'm having trouble connecting right now. Please try again later! 😅</p>`;
+    }
 }
 
 /*========== scroll sections active link in navbar ==========*/
