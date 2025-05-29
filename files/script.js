@@ -2,22 +2,11 @@
 document.addEventListener("DOMContentLoaded", function() {
     const navbar = document.getElementById("header");
     window.addEventListener("scroll", function() {
-      if (window.scrollY > 50) {
+      if (window.scrollY > 50) { // Adjust the value to your preference
         navbar.classList.add("scrolled");
     } else {
         navbar.classList.remove("scrolled");
     }
-    });
-
-    // Auto-hide chat when scrolling past Home section
-    const homeSection = document.getElementById("Home");
-    const chatBox = document.getElementById("chat-box");
-    
-    window.addEventListener("scroll", function() {
-        const homeSectionBottom = homeSection.offsetTop + homeSection.offsetHeight;
-        if (window.scrollY > homeSectionBottom) {
-            chatBox.style.display = "none";
-        }
     });
 });
 
@@ -41,38 +30,31 @@ async function sendMessage() {
     document.getElementById("chat-input").value = '';
 
     try {
-        const response = await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent', {
-            method: 'POST',
+        const prompt = `
+You are Nick AI, a friendly assistant in Harini A's portfolio.
+Context about Harini:
+- 3rd year B.Tech IT student at MKCE
+- Skills: Python, ML, SQL, Data Analytics, UI/UX, Azure, Data Science
+- Projects: Cardiovascular AI, HbA1c Diabetes Detection, Portfolio Website, Menstrual Cycle recommendation, skin cancer detection, online plant management
+User asked: "${input}"
+Respond in a friendly, helpful way using emojis where appropriate.`;
+
+        const res = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=YOUR_API_KEY", {
+            method: "POST",
             headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${import.meta.env.VITE_GEMINI_API_KEY}`
+                "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                contents: [{
-                    parts: [{
-                        text: `You are Nick AI, a friendly assistant in Harini A's portfolio.
-                        Context about Harini:
-                        - 3rd year B.Tech IT student at MKCE
-                        - Skills: Python, ML, SQL, Data Analytics, UI/UX, Azure, Data Science
-                        - Projects: Cardiovascular AI, HbA1c Diabetes Detection, Portfolio Website, Menstrual Cycle recommendation, skin cancer detection, online plant management
-                        User asked: "${input}"
-                        Respond in a friendly, helpful way using emojis where appropriate.`
-                    }]
-                }]
+                contents: [{ parts: [{ text: prompt }] }]
             })
         });
 
-        if (!response.ok) {
-            throw new Error('API request failed');
-        }
-
-        const data = await response.json();
-        const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text || "I'm having trouble connecting right now. Please try again later! 😅";
+        const data = await res.json();
+        const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text || "I'm sorry, I couldn't process that request 😅";
         
         responseDiv.innerHTML += `<p><strong>Nick AI:</strong> ${reply}</p>`;
         responseDiv.scrollTop = responseDiv.scrollHeight;
     } catch (error) {
-        console.error('Error:', error);
         responseDiv.innerHTML += `<p><strong>Nick AI:</strong> I'm having trouble connecting right now. Please try again later! 😅</p>`;
     }
 }
@@ -96,6 +78,7 @@ window.onscroll = () => {
     });
 };
 
+
 /*========== Typing animation in home page ==========*/
 var typed = new Typed(".text", {
     strings: ["Data Analytics", "Programming" , "Web Development", "Ethical Hacking","UI UX Designing"],
@@ -104,6 +87,7 @@ var typed = new Typed(".text", {
     backDelay:1000,
     loop:true
 });
+
 
 /*========== Go top icon in left bottom ==========*/
 const toTop = document.querySelector(".top");
