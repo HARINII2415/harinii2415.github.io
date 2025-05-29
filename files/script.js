@@ -39,15 +39,18 @@ Context about Harini:
 User asked: "${input}"
 Respond in a friendly, helpful way using emojis where appropriate.`;
 
-        const res = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=YOUR_API_KEY", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                contents: [{ parts: [{ text: prompt }] }]
-            })
-        });
+       
+    const res = await fetch("http://localhost:5000/api/chat", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ message: prompt }),
+});
+
+const data = await res.json();
+console.log(data.reply); // or show in chat UI
+
 
         const data = await res.json();
         const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text || "I'm sorry, I couldn't process that request 😅";
