@@ -41,16 +41,31 @@ async function sendMessage() {
     document.getElementById("chat-input").value = '';
 
     try {
-        const response = await fetch("/api/chat", {
-            method: "POST",
+        const response = await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent', {
+            method: 'POST',
             headers: {
-                "Content-Type": "application/json"
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${import.meta.env.VITE_GEMINI_API_KEY}`
             },
-            body: JSON.stringify({ message: input })
+            body: JSON.stringify({
+                contents: [{
+                    parts: [{
+                        text: `You are Nick AI, a friendly assistant in Harini A's portfolio.
+                        Context about Harini:
+                        - 3rd year B.Tech IT student at MKCE
+                        - Skills: Python, ML, SQL, Data Analytics, UI/UX, Azure, Data Science
+                        - Projects: Cardiovascular AI, HbA1c Diabetes Detection, Portfolio Website, Menstrual Cycle recommendation, skin cancer detection, online plant management
+                        User asked: "${input}"
+                        Respond in a friendly, helpful way using emojis where appropriate.`
+                    }]
+                }]
+            })
         });
 
         const data = await response.json();
-        responseDiv.innerHTML += `<p><strong>Nick AI:</strong> ${data.response}</p>`;
+        const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text || "I'm having trouble connecting right now. Please try again later! 😅";
+        
+        responseDiv.innerHTML += `<p><strong>Nick AI:</strong> ${reply}</p>`;
         responseDiv.scrollTop = responseDiv.scrollHeight;
     } catch (error) {
         responseDiv.innerHTML += `<p><strong>Nick AI:</strong> I'm having trouble connecting right now. Please try again later! 😅</p>`;
