@@ -9,7 +9,16 @@ document.addEventListener("DOMContentLoaded", function() {
     }
     });
 });
-
+ const homeSection = document.getElementById("Home");
+    const chatBox = document.getElementById("chat-box");
+    
+    window.addEventListener("scroll", function() {
+        const homeSectionBottom = homeSection.offsetTop + homeSection.offsetHeight;
+        if (window.scrollY > homeSectionBottom) {
+            chatBox.style.display = "none";
+        }
+    });
+});
 function toggleChat() {
     const chatBox = document.getElementById("chat-box");
     chatBox.style.display = chatBox.style.display === "none" ? "block" : "none";
