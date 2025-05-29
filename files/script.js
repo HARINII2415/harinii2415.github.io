@@ -39,7 +39,9 @@ Context about Harini:
 User asked: "${input}"
 Respond in a friendly, helpful way using emojis where appropriate.`;
 
-        const res = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=YOUR_API_KEY", {
+       const apiKey = import.meta.env.GEMINI_API_KEY;
+
+const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
