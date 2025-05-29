@@ -62,17 +62,12 @@ async function sendMessage() {
             })
         });
 
-        if (!response.ok) {
-            throw new Error('API request failed');
-        }
-
         const data = await response.json();
         const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text || "I'm having trouble connecting right now. Please try again later! 😅";
         
         responseDiv.innerHTML += `<p><strong>Nick AI:</strong> ${reply}</p>`;
         responseDiv.scrollTop = responseDiv.scrollHeight;
     } catch (error) {
-        console.error('Error:', error);
         responseDiv.innerHTML += `<p><strong>Nick AI:</strong> I'm having trouble connecting right now. Please try again later! 😅</p>`;
     }
 }
