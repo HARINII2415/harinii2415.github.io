@@ -1,12 +1,23 @@
 /*=========Navbar Scroll===========*/
 document.addEventListener("DOMContentLoaded", function() {
     const navbar = document.getElementById("header");
+    const chatBox = document.getElementById("chat-box");
+    const homeSection = document.getElementById("Home");
+    
     window.addEventListener("scroll", function() {
-      if (window.scrollY > 50) { // Adjust the value to your preference
-        navbar.classList.add("scrolled");
-    } else {
-        navbar.classList.remove("scrolled");
-    }
+        if (window.scrollY > 50) {
+            navbar.classList.add("scrolled");
+        } else {
+            navbar.classList.remove("scrolled");
+        }
+
+        // Close chat box when scrolling out of home section
+        const homeSectionBottom = homeSection.offsetTop + homeSection.offsetHeight;
+        if (window.scrollY > homeSectionBottom) {
+            if (chatBox.style.display === "block") {
+                chatBox.style.display = "none";
+            }
+        }
     });
 });
 
@@ -22,12 +33,13 @@ function handleKeyPress(event) {
 }
 
 async function sendMessage() {
-    const input = document.getElementById("chat-input").value;
-    if (!input.trim()) return;
+    const input = document.getElementById("chat-input");
+    const message = input.value.trim();
+    if (!message) return;
 
     const responseDiv = document.getElementById("chat-response");
-    responseDiv.innerHTML += `<p><strong>You:</strong> ${input}</p>`;
-    document.getElementById("chat-input").value = '';
+    responseDiv.innerHTML += `<p><strong>You:</strong> ${message}</p>`;
+    input.value = '';
 
     try {
         const prompt = `
@@ -36,7 +48,7 @@ Context about Harini:
 - 3rd year B.Tech IT student at MKCE
 - Skills: Python, ML, SQL, Data Analytics, UI/UX, Azure, Data Science
 - Projects: Cardiovascular AI, HbA1c Diabetes Detection, Portfolio Website, Menstrual Cycle recommendation, skin cancer detection, online plant management
-User asked: "${input}"
+User asked: "${message}"
 Respond in a friendly, helpful way using emojis where appropriate.`;
 
         const res = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=YOUR_API_KEY", {
@@ -78,7 +90,6 @@ window.onscroll = () => {
     });
 };
 
-
 /*========== Typing animation in home page ==========*/
 var typed = new Typed(".text", {
     strings: ["Data Analytics", "Programming" , "Web Development", "Ethical Hacking","UI UX Designing"],
@@ -87,7 +98,6 @@ var typed = new Typed(".text", {
     backDelay:1000,
     loop:true
 });
-
 
 /*========== Go top icon in left bottom ==========*/
 const toTop = document.querySelector(".top");
