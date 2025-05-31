@@ -23,7 +23,13 @@ document.addEventListener("DOMContentLoaded", function() {
 
 function toggleChat() {
     const chatBox = document.getElementById("chat-box");
-    chatBox.style.display = chatBox.style.display === "none" ? "block" : "none";
+    const homeSection = document.getElementById("Home");
+    const homeSectionBottom = homeSection.offsetTop + homeSection.offsetHeight;
+    
+    // Only toggle chat if we're in the home section
+    if (window.scrollY <= homeSectionBottom) {
+        chatBox.style.display = chatBox.style.display === "none" ? "block" : "none";
+    }
 }
 
 function handleKeyPress(event) {
@@ -40,8 +46,10 @@ async function sendMessage() {
     const responseDiv = document.getElementById("chat-response");
     responseDiv.innerHTML += `<p><strong>You:</strong> ${message}</p>`;
     input.value = '';
+    responseDiv.scrollTop = responseDiv.scrollHeight;
 
     try {
+        const apiKey = process.env.GEMINI_API_KEY;
         const prompt = `
 You are Nick AI, a friendly assistant in Harini A's portfolio.
 Context about Harini:
@@ -51,7 +59,7 @@ Context about Harini:
 User asked: "${message}"
 Respond in a friendly, helpful way using emojis where appropriate.`;
 
-        const res = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=YOUR_API_KEY", {
+        const res = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=" + apiKey, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -61,13 +69,19 @@ Respond in a friendly, helpful way using emojis where appropriate.`;
             })
         });
 
+        if (!res.ok) {
+            throw new Error('API request failed');
+        }
+
         const data = await res.json();
         const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text || "I'm sorry, I couldn't process that request 😅";
         
         responseDiv.innerHTML += `<p><strong>Nick AI:</strong> ${reply}</p>`;
         responseDiv.scrollTop = responseDiv.scrollHeight;
     } catch (error) {
+        console.error('Chat error:', error);
         responseDiv.innerHTML += `<p><strong>Nick AI:</strong> I'm having trouble connecting right now. Please try again later! 😅</p>`;
+        responseDiv.scrollTop = responseDiv.scrollHeight;
     }
 }
 
@@ -114,14 +128,14 @@ window.addEventListener("scroll",() =>{
 document.addEventListener('DOMContentLoaded', function () {
     const cards = document.querySelectorAll('.reveal');
     function checkScroll() {
-    cards.forEach(card => {
-        const rect = card.getBoundingClientRect();
-        const windowHeight = window.innerHeight;
-        if (rect.top < windowHeight * 0.75) {
-            card.style.opacity = 1;
-            card.style.transform = 'translateY(0)';
-        }
-    });
+        cards.forEach(card => {
+            const rect = card.getBoundingClientRect();
+            const windowHeight = window.innerHeight;
+            if (rect.top < windowHeight * 0.75) {
+                card.style.opacity = 1;
+                card.style.transform = 'translateY(0)';
+            }
+        });
     }
     checkScroll();
     window.addEventListener('scroll', checkScroll);
