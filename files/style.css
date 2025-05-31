@@ -1,0 +1,133 @@
+/* Add these styles to your existing CSS file */
+.chat-container {
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    z-index: 1000;
+    font-family: 'Protest Revolution', sans-serif;
+}
+
+#chat-toggle {
+    background: #0ef;
+    border: none;
+    color: #000;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    transition: transform 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+}
+
+#chat-toggle:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px #0ef;
+}
+
+#chat-box {
+    position: absolute;
+    top: 70px;
+    right: 0;
+    width: 300px;
+    background: #1a1d25;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+    overflow: hidden;
+    display: none;
+}
+
+.chat-header {
+    background: #0ef;
+    color: #000;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.chat-header h3 {
+    margin: 0;
+    font-size: 16px;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    color: #000;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+#chat-response {
+    height: 300px;
+    overflow-y: auto;
+    padding: 15px;
+    color: #fff;
+}
+
+#chat-response p {
+    margin: 10px 0;
+    line-height: 1.4;
+}
+
+#chat-response strong {
+    color: #0ef;
+}
+
+.chat-input-container {
+    display: flex;
+    padding: 15px;
+    background: #2b2e3b;
+    gap: 10px;
+}
+
+#chat-input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #0ef;
+    border-radius: 20px;
+    background: #1a1d25;
+    color: #fff;
+    outline: none;
+}
+
+.chat-input-container button {
+    background: #0ef;
+    border: none;
+    color: #000;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    transition: transform 0.2s ease;
+}
+
+.chat-input-container button:hover {
+    transform: scale(1.1);
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .chat-container {
+        top: auto;
+        bottom: 20px;
+        right: 20px;
+    }
+
+    #chat-box {
+        position: fixed;
+        top: auto;
+        bottom: 80px;
+        right: 20px;
+        width: calc(100% - 40px);
+        max-width: 300px;
+    }
+}
