@@ -66,6 +66,14 @@ window.onscroll = () => {
         let height = sec.offsetHeight;
         let id = sec.getAttribute('id');
         if(top >= offset && top < offset + height) {
+            // Close chat when changing sections
+            if (id !== 'Home') {
+                const chatBox = document.getElementById("chat-box");
+                if (chatBox.style.display === "block") {
+                    chatBox.style.display = "none";
+                }
+            }
+            
             navLinks.forEach(links => {
                 links.classList.remove('active');
                 document.querySelector('header nav a[href*=' + id + ']').classList.add('active');
