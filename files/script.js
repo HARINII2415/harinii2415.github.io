@@ -36,7 +36,7 @@ function sendMessage() {
     const lowerMessage = message.toLowerCase();
     
     if (lowerMessage.includes("hello") || lowerMessage.includes("hi")) {
-        response = "Hello! How can I help you today? 😊";
+        response = "Hello! How can I help you today? 😊 Ask about projects,skills and experience 😶‍🌫️ ";
     } else if (lowerMessage.includes("skills")) {
         response = "Harini is skilled in Python, ML, SQL, Data Analytics, UI/UX, Azure, and Data Science! 💻";
     } else if (lowerMessage.includes("projects")) {
