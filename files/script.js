@@ -21,42 +21,36 @@ function handleKeyPress(event) {
     }
 }
 
-async function sendMessage() {
-    const input = document.getElementById("chat-input").value;
-    if (!input.trim()) return;
+function sendMessage() {
+    const input = document.getElementById("chat-input");
+    const message = input.value.trim();
+    if (!message) return;
 
     const responseDiv = document.getElementById("chat-response");
-    responseDiv.innerHTML += `<p><strong>You:</strong> ${input}</p>`;
-    document.getElementById("chat-input").value = '';
+    responseDiv.innerHTML += `<p><strong>You:</strong> ${message}</p>`;
+    input.value = '';
 
-    try {
-        const prompt = `
-You are Nick AI, a friendly assistant in Harini A's portfolio.
-Context about Harini:
-- 3rd year B.Tech IT student at MKCE
-- Skills: Python, ML, SQL, Data Analytics, UI/UX, Azure, Data Science
-- Projects: Cardiovascular AI, HbA1c Diabetes Detection, Portfolio Website, Menstrual Cycle recommendation, skin cancer detection, online plant management
-User asked: "${input}"
-Respond in a friendly, helpful way using emojis where appropriate.`;
+    // Simple response logic based on keywords
+    let response = "I'm sorry, I don't understand that. Can you please try asking something else?";
 
-        const res = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=YOUR_API_KEY", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                contents: [{ parts: [{ text: prompt }] }]
-            })
-        });
-
-        const data = await res.json();
-        const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text || "I'm sorry, I couldn't process that request 😅";
-        
-        responseDiv.innerHTML += `<p><strong>Nick AI:</strong> ${reply}</p>`;
-        responseDiv.scrollTop = responseDiv.scrollHeight;
-    } catch (error) {
-        responseDiv.innerHTML += `<p><strong>Nick AI:</strong> I'm having trouble connecting right now. Please try again later! 😅</p>`;
+    const lowerMessage = message.toLowerCase();
+    
+    if (lowerMessage.includes("hello") || lowerMessage.includes("hi")) {
+        response = "Hello! How can I help you today? 😊";
+    } else if (lowerMessage.includes("skills")) {
+        response = "Harini is skilled in Python, ML, SQL, Data Analytics, UI/UX, Azure, and Data Science! 💻";
+    } else if (lowerMessage.includes("projects")) {
+        response = "Harini has worked on several projects including Cardiovascular AI, HbA1c Diabetes Detection, Portfolio Website, and more! 🚀";
+    } else if (lowerMessage.includes("contact")) {
+        response = "You can contact Harini through email at harinii2415@gmail.com or connect on LinkedIn! 📧";
+    } else if (lowerMessage.includes("education") || lowerMessage.includes("study")) {
+        response = "Harini is a 3rd year B.Tech IT student at MKCE with a CGPA of 7.2! 🎓";
+    } else if (lowerMessage.includes("experience")) {
+        response = "Check out Harini's certifications and experience in the timeline section! 💼";
     }
+
+    responseDiv.innerHTML += `<p><strong>Nick AI:</strong> ${response}</p>`;
+    responseDiv.scrollTop = responseDiv.scrollHeight;
 }
 
 /*========== scroll sections active link in navbar ==========*/
@@ -78,7 +72,6 @@ window.onscroll = () => {
     });
 };
 
-
 /*========== Typing animation in home page ==========*/
 var typed = new Typed(".text", {
     strings: ["Data Analytics", "Programming" , "Web Development", "Ethical Hacking","UI UX Designing"],
@@ -87,7 +80,6 @@ var typed = new Typed(".text", {
     backDelay:1000,
     loop:true
 });
-
 
 /*========== Go top icon in left bottom ==========*/
 const toTop = document.querySelector(".top");
