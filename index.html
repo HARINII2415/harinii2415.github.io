@@ -83,9 +83,45 @@
                 <h1>Harini A</h1>
                 <h4 style="--i:6">I'm a Engineering graduate who is<br>
                     passionate in <span class="text"></span></h4>
-                
+                <div class="image-wrapper" onmouseover="showHi()" onmouseout="hideHi>
                 <div class="img">
                     <img src="./img/ava.png" class="responsive" alt="Name">
+ 
+  <div id="hiText">Hi 👋</div>
+</div>
+
+<style>
+.image-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.image-wrapper img {
+  width: 300px;
+  border-radius: 20px;
+}
+
+#hiText {
+  position: absolute;
+  top: 10px;
+  left: 15px;
+  background-color: #ff69b4;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 10px;
+  font-weight: bold;
+  display: none;
+}
+</style>
+
+<script>
+function showHi() {
+  document.getElementById("hiText").style.display = "block";
+}
+function hideHi() {
+  document.getElementById("hiText").style.display = "none";
+}
+</script>
                 </div>
 
                 <div class="home-sci">
