@@ -37,7 +37,7 @@ function sendMessage() {
     
     if (lowerMessage.includes("hello") || lowerMessage.includes("hi")) {
         response = "Hello! How can I help you today? 😊 Ask about projects,skills and experience 😶‍🌫️ ";
-    } else if (lowerMessage.includes("skills")) {
+    } else if (lowerMessage.includes("skill")) {
         response = "Harini is skilled in Python, ML, SQL, Data Analytics, UI/UX, Azure, and Data Science! 💻";
     } else if (lowerMessage.includes("projects")) {
         response = "Harini has worked on several projects including Cardiovascular AI, HbA1c Diabetes Detection, Portfolio Website, and more! 🚀";
@@ -84,7 +84,7 @@ window.onscroll = () => {
 
 /*========== Typing animation in home page ==========*/
 var typed = new Typed(".text", {
-    strings: ["Data Analytics", "Programming" , "Web Development", "Ethical Hacking","UI UX Designing"],
+    strings: ["Data Science","Data Analytics", "Programming" , "Web Development", "Ethical Hacking","UI UX Designing"],
     typeSpeed:100,
     backSpeed:100,
     backDelay:1000,
